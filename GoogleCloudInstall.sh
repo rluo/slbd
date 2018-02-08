@@ -1,6 +1,26 @@
+# install desktop
+sudo apt-get install ubuntu-desktop
+sudo apt-get install gnome-panel gnome-settings-deamon gnome-terminal vnc4server
+## change firewall rules
+sudo ufw allow 5901:5910/tcp
+
+# VNC
+## start vncserver  with size  1024x768
+vncserver -geometry 1024x768
+
+## add to the file .vnc/xstartup and comment out the last two lines
+gnome-panel &
+gnome-settings-deamon &
+metacity &
+nautilus &
+gnome-terminal &
+## change network to allow all traffic 
 
 
-
+# Data disk
+## make sure your data disk is attached
+sudo cfdisk /dev/sdb
+sudo mkfs.ext4 /dev/sdb1
 
 # install R
 sudo apt-get update
