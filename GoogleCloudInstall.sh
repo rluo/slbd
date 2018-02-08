@@ -1,6 +1,6 @@
 # install desktop
 sudo apt-get install ubuntu-desktop
-sudo apt-get install gnome-panel gnome-settings-deamon gnome-terminal vnc4server
+sudo apt-get install gnome-panel gnome-settings-daemon gnome-terminal vnc4server
 ## change firewall rules
 sudo ufw allow 5901:5910/tcp
 
