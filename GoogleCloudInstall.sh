@@ -44,7 +44,41 @@ sudo passwd xi_rossi_luo
 
 # R Selenium install
 
-# Spark install
+## Spark install
+# Install java
+sudo apt-add-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+
+# Install sbt
+echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
+sudo apt-get update
+sudo apt-get install sbt
+
+# Install spark
+wget -c http://apache.claz.org/spark/spark-2.2.1/spark-2.2.1-bin-hadoop2.7.tgz
+tar xzvf spark-2.2.1-bin-hadoop2.7.tgz
+mv spark-2.2.1-bin-hadoop2.7/ spark
+sudo mv spark /usr/lib/
+cd /usr/lib/spark/conf
+cp spark-env.sh.template spark-env.sh
+
+# Configure network settings
+sudo sh -c "echo 'net.ipv6.conf.all.disable_ipv6 = 1' >> /etc/sysctl.conf"
+sudo sh -c "echo 'net.ipv6.conf.defaults.disable_ipv6 = 1' >> /etc/sysctl.conf"
+sudo sh -c "echo 'net.ipv6.conf.lo.disable_ipv6 = 1' >> /etc/sysctl.conf"
+
+# Configure Spark
+echo "JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> spark-env.sh
+echo "SPARK_WORKER_MEMORY=8g" >> spark-env.sh
+
+# Add binaries to path
+echo "export JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> ~/.bashrc
+echo "export SBT_HOME=/usr/share/sbt/bin/sbt-launch.jar" >> ~/.bashrc
+echo "export SPARK_HOME=/usr/lib/spark" >> ~/.bashrc
+echo "export PATH=\$PATH:\$JAVA_HOME/bin:/usr/share/sbt/bin/:\$SPARK_HOME/bin" >> ~/.bashrc
+source ~/.bashrc
 
 # Zeppelin install
 
