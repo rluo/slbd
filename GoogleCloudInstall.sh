@@ -83,6 +83,7 @@ source ~/.bashrc
 # Zeppelin install
 
 # TensorFlow install
-
+pip install numpy --upgrade
+pip install tensorflow
 
 
