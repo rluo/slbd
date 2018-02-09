@@ -39,5 +39,15 @@ sudo gdebi rstudio-server-1.1.423-amd64.deb
 
 ## setting up username/password
 sudo passwd xi_rossi_luo
+## change your firewall rules to allow tcp:8787 or allow all protocols
 ## access your website from xxx.xxx.xxx.xxx:8787 where xxx- is your VM ip
+
+
+# Spark install
+
+
+# Zeppelin install
+
+# TensorFlow install
+
 
