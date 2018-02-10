@@ -42,7 +42,20 @@ sudo passwd xi_rossi_luo
 ## change your firewall rules to allow tcp:8787 or allow all protocols
 ## access your website from xxx.xxx.xxx.xxx:8787 where xxx- is your VM ip
 
-# R Selenium install
+## R Selenium install
+# First upgrade version of R
+sudo sh -c "echo 'deb http://cran.case.edu/bin/linux/ubuntu $(lsb_release -c -s)/' >> /etc/apt/sources.list"
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+sudo add-apt-repository ppa:marutter/rdev
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install r-base
+
+sudo apt-get install libcurl4-openssl-dev libxml2-dev libgeos-dev libssl-dev
+sudo R
+# Once inside R interpreter, enter the following command and pick a mirror:
+install.packages("RSelenium")
 
 ## Spark install
 # Install java
@@ -56,7 +69,8 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89
 sudo apt-get update
 sudo apt-get install sbt
 
-# Install spark
+# Download and unpack spark and move it into /usr/lib
+cd ~/Downloads
 wget -c http://apache.claz.org/spark/spark-2.2.1/spark-2.2.1-bin-hadoop2.7.tgz
 tar xzvf spark-2.2.1-bin-hadoop2.7.tgz
 mv spark-2.2.1-bin-hadoop2.7/ spark
@@ -70,8 +84,14 @@ sudo sh -c "echo 'net.ipv6.conf.defaults.disable_ipv6 = 1' >> /etc/sysctl.conf"
 sudo sh -c "echo 'net.ipv6.conf.lo.disable_ipv6 = 1' >> /etc/sysctl.conf"
 
 # Configure Spark
+cd /usr/lib/spark/conf
+cp spark-env.sh.template spark-env.sh
 echo "JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> spark-env.sh
-echo "SPARK_WORKER_MEMORY=8g" >> spark-env.sh
+echo "SPARK_WORKER_MEMORY=1g" >> spark-env.sh
+echo "SPARK_WORKER_CORES=2" >> spark-env.sh
+echo "SPARK_WORKER_INSTANCES=2" >> spark-env.sh
+mkdir -p ~/ssd/spark/
+echo "SPARK_WORKER_DIR=~/ssd/spark" >> spark-env.sh
 
 # Add binaries to path
 echo "export JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> ~/.bashrc
@@ -85,5 +105,3 @@ source ~/.bashrc
 # TensorFlow install
 pip install numpy --upgrade
 pip install tensorflow
-
-
