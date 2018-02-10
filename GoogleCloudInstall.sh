@@ -6,6 +6,8 @@ sudo ufw allow 5901:5910/tcp
 
 # VNC
 ## start vncserver  with size  1024x768
+## Access by connecting to xxx.xxx.xxx.xxx:5901
+# Stop vncserver with vncserver -kill :1
 vncserver -geometry 1024x768
 
 ## add to the file .vnc/xstartup and comment out the last two lines
@@ -92,6 +94,13 @@ echo "SPARK_WORKER_CORES=2" >> spark-env.sh
 echo "SPARK_WORKER_INSTANCES=2" >> spark-env.sh
 mkdir -p ~/ssd/spark/
 echo "SPARK_WORKER_DIR=~/ssd/spark" >> spark-env.sh
+
+# setup spark cluster mode
+/usr/lib/spark/sbin/start-master.sh
+cd ~/.ssh
+ssh-keygen
+cat id_rsa.pub  >> authorized_keys
+/usr/lib/spark/sbin/start-slaves.sh
 
 # Add binaries to path
 echo "export JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> ~/.bashrc
