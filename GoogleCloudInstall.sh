@@ -26,6 +26,31 @@ sudo mkfs.ext4 /dev/sdb1
 sudo apt-get update
 sudo apt-get install r-base r-base-dev r-base-html
 
+## alternative: install R from source packages
+wget -c https://cran.r-project.org/src/base/R-3/R-3.4.3.tar.gz
+tar xvf R-3.4.3.tar.gz
+
+
+## install x window development files
+sudo apt-get install libx11-dev  xorg-dev
+sudo apt-get install libcurl4-openssl-dev
+
+
+## install JAVA
+sudo apt-add-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java9-installer oracle-java9-set-default
+
+## compile and install R
+./configure --prefix=/home/x
+i_rossi_luo/Programs/R-3.4.3
+make
+make install
+
+
+
+
+
 # Download python anaconda from website or using the script below
 wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
 bash Anaconda3-5.0.1-Linux-x86_64.sh
