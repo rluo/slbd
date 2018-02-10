@@ -109,8 +109,27 @@ echo "export SPARK_HOME=/usr/lib/spark" >> ~/.bashrc
 echo "export PATH=\$PATH:\$JAVA_HOME/bin:/usr/share/sbt/bin/:\$SPARK_HOME/bin" >> ~/.bashrc
 source ~/.bashrc
 
-# Zeppelin install
+### Zeppelin install
+cd ~/ssd
 
-# TensorFlow install
+# Download and unpack Zeppelin
+wget -c http://mirror.cc.columbia.edu/pub/software/apache/zeppelin/zeppelin-0.7.3/zeppelin-0.7.3-bin-all.tgz
+tar zxvf zeppelin-0.7.3-bin-all.tgz
+mv zeppelin-0.7.3-bin-all zeppelin
+
+# Create env file from template
+cd zeppelin/conf/
+cp zeppelin-env.sh.template zeppelin-env.sh
+
+# Populate env file
+echo "export JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> zeppelin-env.sh
+echo "export SPARK_HOME=/usr/lib/spark" >> zeppelin-env.sh
+echo "export ZEPPELIN_PORT=8099" >> zeppelin-env.sh
+
+# Replace port number and start daemon
+sed -i 's/8080/8099/' zeppelin-site.xml.template
+../bin/zeppelin-daemon.sh start
+
+### TensorFlow install
 pip install numpy --upgrade
 pip install tensorflow
