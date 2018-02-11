@@ -12,7 +12,7 @@ vncserver -geometry 1024x768
 
 ## add to the file .vnc/xstartup and comment out the last two lines
 gnome-panel &
-gnome-settings-deamon &
+gnome-settings-daemon &
 metacity &
 nautilus &
 gnome-terminal &
