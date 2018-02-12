@@ -4,12 +4,6 @@ sudo apt-get install gnome-panel gnome-settings-daemon gnome-terminal vnc4server
 ## change firewall rules
 sudo ufw allow 5901:5910/tcp
 
-# VNC
-## start vncserver  with size  1024x768
-## Access by connecting to xxx.xxx.xxx.xxx:5901
-# Stop vncserver with vncserver -kill :1
-vncserver -geometry 1024x768
-
 ## add to the file .vnc/xstartup and comment out the last two lines
 gnome-panel &
 gnome-settings-daemon &
@@ -17,6 +11,12 @@ metacity &
 nautilus &
 gnome-terminal &
 ## change network to allow all traffic 
+
+# VNC
+## start vncserver  with size  1024x768
+## Access by connecting to xxx.xxx.xxx.xxx:5901
+# Stop vncserver with vncserver -kill :1
+vncserver -geometry 1024x768
 
 
 # Data disk
