@@ -155,6 +155,9 @@ echo "export ZEPPELIN_PORT=8099" >> zeppelin-env.sh
 sed -i 's/8080/8099/' zeppelin-site.xml.template
 ../bin/zeppelin-daemon.sh start
 
+# install R package knitr, data.table, googleVis if you want to try the R spark tutorial
+
+
 ### TensorFlow install
 pip install numpy --upgrade
 pip install tensorflow
