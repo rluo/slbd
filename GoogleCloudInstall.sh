@@ -1,76 +1,68 @@
-# install desktop
+#0. update your software list, a good practice to run this command 
+sudo apt-get update
+
+#1. install desktop
 sudo apt-get install ubuntu-desktop
 sudo apt-get install gnome-panel gnome-settings-daemon gnome-terminal vnc4server
 ## change firewall rules
 sudo ufw allow 5901:5910/tcp
 
-## add to the file .vnc/xstartup and comment out the last two lines
+## add the following test to the file .vnc/xstartup and comment out the last two lines
 gnome-panel &
 gnome-settings-daemon &
 metacity &
 nautilus &
 gnome-terminal &
-## change network to allow all traffic 
 
-# VNC
+#2. On GC web interface: change network to allow all traffic 
+
+#3. VNC
 ## start vncserver  with size  1024x768
 ## Access by connecting to xxx.xxx.xxx.xxx:5901
 # Stop vncserver with vncserver -kill :1
 vncserver -geometry 1024x768
 
-
-# Data disk
+#4A. Data disk (optional) 
 ## make sure your data disk is attached
 sudo cfdisk /dev/sdb
 sudo mkfs.ext4 /dev/sdb1
 
-# install R
+#4B. Alternative 4A, you could increase the disk to 256GB
+
+#5A.  install default R
 sudo apt-get update
 sudo apt-get install r-base r-base-dev r-base-html
 
-## alternative: install R from source packages
+#5B. alternative: install R from source packages
 wget -c https://cran.r-project.org/src/base/R-3/R-3.4.3.tar.gz
 tar xvf R-3.4.3.tar.gz
-
-
 ## install x window development files
 sudo apt-get install libx11-dev  xorg-dev
 sudo apt-get install libcurl4-openssl-dev
-
-
 ## install JAVA
 sudo apt-add-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java9-installer oracle-java9-set-default
-
 ## compile and install R
+cd R-3.4.3
 ./configure --prefix=/home/x
 i_rossi_luo/Programs/R-3.4.3
 make
 make install
 
-
-
-
-
-# Download python anaconda from website or using the script below
-wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
-bash Anaconda3-5.0.1-Linux-x86_64.sh
-source ~/.bashrc
-
-# R web interface
+#5C. R web interface
 ## Follow the instructions for R studio server from R Studio Website
 sudo apt-get install gdebi-core
 wget https://download2.rstudio.org/rstudio-server-1.1.423-amd64.deb
 sudo gdebi rstudio-server-1.1.423-amd64.deb
-
 ## setting up username/password
 sudo passwd xi_rossi_luo
 ## change your firewall rules to allow tcp:8787 or allow all protocols
 ## access your website from xxx.xxx.xxx.xxx:8787 where xxx- is your VM ip
 
-## R Selenium install
-# First upgrade version of R
+
+#6. R Selenium install
+#6A. First upgrade version of default R
 sudo sh -c "echo 'deb http://cran.case.edu/bin/linux/ubuntu $(lsb_release -c -s)/' >> /etc/apt/sources.list"
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 sudo add-apt-repository ppa:marutter/rdev
@@ -79,12 +71,23 @@ sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install r-base
 
+#6B. Alternative to 6A, if you did 5B,
 sudo apt-get install libcurl4-openssl-dev libxml2-dev libgeos-dev libssl-dev
-sudo R
-# Once inside R interpreter, enter the following command and pick a mirror:
-install.packages("RSelenium")
+cd ~/Programs/R-3.4.3/bin
+./R
+### Once inside the R interpreter, enter the following command and pick a mirror:
+> install.packages("RSelenium")
 
-## Spark install
+
+
+
+#7.Download python anaconda from website or using the script below
+wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
+bash Anaconda3-5.0.1-Linux-x86_64.sh
+source ~/.bashrc
+
+
+#8. Spark install
 # Install java
 sudo apt-add-repository ppa:webupd8team/java
 sudo apt-get update
@@ -134,7 +137,7 @@ echo "export SPARK_HOME=/usr/lib/spark" >> ~/.bashrc
 echo "export PATH=\$PATH:\$JAVA_HOME/bin:/usr/share/sbt/bin/:\$SPARK_HOME/bin" >> ~/.bashrc
 source ~/.bashrc
 
-### Zeppelin install
+#8. Zeppelin install
 cd ~/ssd
 
 # Download and unpack Zeppelin
@@ -158,6 +161,6 @@ sed -i 's/8080/8099/' zeppelin-site.xml.template
 # install R package knitr, data.table, googleVis if you want to try the R spark tutorial
 
 
-### TensorFlow install
+#9. TensorFlow install
 pip install numpy --upgrade
 pip install tensorflow
