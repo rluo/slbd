@@ -137,7 +137,12 @@ echo "export SPARK_HOME=/usr/lib/spark" >> ~/.bashrc
 echo "export PATH=\$PATH:\$JAVA_HOME/bin:/usr/share/sbt/bin/:\$SPARK_HOME/bin" >> ~/.bashrc
 source ~/.bashrc
 
-#8. Zeppelin install
+#8B. install python numpy 
+sudo apt-get install python-pip  
+sudo -H pip install numpy scipy
+sudo -H pip install --upgrade pip
+
+#8C. Zeppelin install
 cd ~/ssd
 
 # Download and unpack Zeppelin
