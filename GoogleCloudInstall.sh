@@ -24,8 +24,13 @@ vncserver -geometry 1024x768
 
 #4A. Data disk (optional) 
 ## make sure your data disk is attached
+sudo mkdir -p /mnt/data/
 sudo cfdisk /dev/sdb
 sudo mkfs.ext4 /dev/sdb1
+sudo mount /dev/sdb1 /mnt/data/
+
+# To check, run:
+df -h
 
 #4B. Alternative 4A, you could increase the disk to 256GB
 
