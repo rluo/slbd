@@ -174,3 +174,22 @@ sed -i 's/8080/8099/' zeppelin-site.xml.template
 #9. TensorFlow install
 pip install numpy --upgrade
 pip install tensorflow
+
+
+#10. Jupyter
+sudo pip -H install jupyter
+sudo apt-get install python3-pip
+sudo -H ipython3 kernelspec install-self
+sudo -H pip3 install numpy scipy
+sudo -H pip3 install tensorflow
+sudo -H pip3 install matplotlib
+sudo -H pip3 install sklearn
+jupyter notebook --generate-config
+nano ~/.jupyter/jupyter_notebook_config.py
+echo "c = get_config()" >> ~/.jupyter/jupyter_notebook_config.py
+echo "c.NotebookApp.ip = '*'" >> ~/.jupyter/jupyter_notebook_config.py
+echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py
+echo "c.NotebookApp.port = 1717" >> ~/.jupyter/jupyter_notebook_config.py
+sudo -H pip3 install jupyter
+
+
